@@ -1,15 +1,15 @@
 #include<iostream>
 using namespace std;
-Class MinHeapNode {
+class MinHeapNode {
 	public:
 	int element; // element to be stored
 	int i; // index of array from which element is taken
 	int j; // index of next element to picked within array
 };
 
-Void swap(MinHeapNode *x, MinHeapNode *y);
+void swap(MinHeapNode *x, MinHeapNode *y);
 
-class MinHeapNode {
+class MinHeap {
 	MinHeapNode *harr; // pointer to array of elements in heap
 	int heap_size; //size of min heap
 	public: 
@@ -42,15 +42,17 @@ class MinHeapNode {
 int merge(int *arrs[], int arrs_length[], int *re_arr, int & re_size){
 	//re arr is output
 	
-	//create a min heap with k heap nodes.
+	//create a min heap with 5 heap nodes.
 	MinHeapNode *harr = new MinHeapNode[5];
+	
+	//assign the first element of each array to Min Heap Node
 	for (int i = 0; i < 5; i++){
-		harr[0].element = arrs[i][0]; //store first element of each array in heap
+		harr[i].element = arrs[i][0]; //store first element of each array in heap
 		harr[i].i=i; // array index
 		harr[i].j=1; // index of next element 
 	}
 	
-	MinHeap hp(harr,k); //create the heap
+	MinHeap hp(harr,5); //create the heap
 	
 	for (int count =0; count < re_size; count++)
 	{	
@@ -61,13 +63,14 @@ int merge(int *arrs[], int arrs_length[], int *re_arr, int & re_size){
 	//Find the next element that will replace current
 	//root of heap the next element belongs to same
 	//array as the current root
-	if (root.j< arrs_length[i]) {
-		root.element = arr[root.i][root.j];
+	if (root.j < arrs_length[root.i]) {
+		root.element = arrs[root.i][root.j];
 		root.j +=1;
 	}
-	else {root.element = INT_MAX;}
+	//else {root.element = 1000000000;}
 	
 	hp.replaceMin(root);
+	}
 	
     return 0;
 }
